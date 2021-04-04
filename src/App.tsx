@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import {Button} from "./Button";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+  let [count, setCount] = useState(0);
+
+  const [disabledInc, setDisabledInc] = useState(false);
+  const [disabledReset, setDisabledReset] = useState(true);
+
+const inc = () => {
+   setCount(++count)
+  if (count   === 5 ) {
+    setDisabledInc(true)
+   }
+   setDisabledReset(false)
+  
+}
+
+const reset = () => {
+  setCount(0)
+  setDisabledReset(true)
+  setDisabledInc(false)
+}
+
+ return (
+     
+ <div className="wrapper">
+   <div className={count ===5 ? "wrapper-count1" : "wrapper-count"}>{count}</div>
+     <Button disabled={disabledInc} onClick={inc} titleButton={'inc'}/>
+     <Button disabled={disabledReset} onClick={reset} titleButton={'reset'}/>
+</div> 
+   
+       
   );
 }
+
 
 export default App;
